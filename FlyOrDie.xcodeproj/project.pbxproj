@@ -16,6 +16,7 @@
 		788483FC1C6FD21E00F96092 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 788483FA1C6FD21E00F96092 /* LaunchScreen.storyboard */; };
 		788484071C6FD21F00F96092 /* FlyOrDieTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 788484061C6FD21F00F96092 /* FlyOrDieTests.swift */; };
 		788484121C6FD21F00F96092 /* FlyOrDieUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 788484111C6FD21F00F96092 /* FlyOrDieUITests.swift */; };
+		789DFCD41C72289300826897 /* MenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789DFCD31C72289300826897 /* MenuScene.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		7884840D1C6FD21F00F96092 /* FlyOrDieUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FlyOrDieUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		788484111C6FD21F00F96092 /* FlyOrDieUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlyOrDieUITests.swift; sourceTree = "<group>"; };
 		788484131C6FD21F00F96092 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		789DFCD31C72289300826897 /* MenuScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuScene.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +106,7 @@
 				788483ED1C6FD21E00F96092 /* AppDelegate.swift */,
 				788483EF1C6FD21E00F96092 /* GameScene.sks */,
 				788483F11C6FD21E00F96092 /* GameScene.swift */,
+				789DFCD31C72289300826897 /* MenuScene.swift */,
 				788483F31C6FD21E00F96092 /* GameViewController.swift */,
 				788483F51C6FD21E00F96092 /* Main.storyboard */,
 				788483F81C6FD21E00F96092 /* Assets.xcassets */,
@@ -265,6 +268,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				788483F21C6FD21E00F96092 /* GameScene.swift in Sources */,
+				789DFCD41C72289300826897 /* MenuScene.swift in Sources */,
 				788483F41C6FD21E00F96092 /* GameViewController.swift in Sources */,
 				788483EE1C6FD21E00F96092 /* AppDelegate.swift in Sources */,
 			);
