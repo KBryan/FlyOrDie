@@ -11,6 +11,7 @@ class GameScene: SKScene {
     let playButtonTex = SKTexture(imageNamed: "play")
     var backgroundNode = SKSpriteNode()
     let bgTexture = SKTexture(imageNamed: "bg")
+    var playButton = SKSpriteNode()
     
     override func didMoveToView(view: SKView) {
 
@@ -38,7 +39,6 @@ class GameScene: SKScene {
        
     }
     func makePlayButton(textureToLoad:SKTexture) {
-        var playButton = SKSpriteNode()
         playButton = SKSpriteNode(texture: textureToLoad)
         playButton.name = "playButtonTex"
         playButton.zPosition = 9
@@ -60,6 +60,7 @@ class GameScene: SKScene {
                 nextScene.scaleMode = .AspectFill
                 
                 scene?.view?.presentScene(nextScene)
+                self.removeChildrenInArray([playButton])
             }
         }
     }

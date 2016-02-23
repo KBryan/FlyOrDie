@@ -199,25 +199,12 @@ class MainGame: SKScene , SKPhysicsContactDelegate{
             player.physicsBody?.applyImpulse(CGVectorMake(0, 50))
         } else {
             
-            playButton = SKSpriteNode(texture: playButtonTex)
-            playButton.name = "playButtonTex"
             
+            let nextScene = GameScene(size: scene!.size)
+            nextScene.scaleMode = .AspectFill
             
-            playButton.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame))
+            scene?.view?.presentScene(nextScene)
             
-            
-            self.addChild(playButton)
-            
-            score = 0
-            scoreLabel.text = "0"
-            movingObjects.removeAllChildren()
-            labelHolder.removeAllChildren()
-            player.physicsBody?.velocity = CGVectorMake(0, 0)
-            player.position = CGPoint(x: CGRectGetMidX(self.frame), y: CGRectGetMidY(self.frame))
-            gameOver = 0
-            movingObjects.speed = 1
-            
-            makeBackground()
         }
     }
     
