@@ -1,26 +1,19 @@
 import SpriteKit
 
-
-
-
-
 class GameScene: SKScene {
-    
-    
-    
+
     let playButtonTex = SKTexture(imageNamed: "play")
+    let logoImage = SKTexture(imageNamed: "Logo.pdf")
     var backgroundNode = SKSpriteNode()
     let bgTexture = SKTexture(imageNamed: "bg")
     var playButton = SKSpriteNode()
-    
-    
-    var  testArray = [0,0,0]
-    
+    var logo = SKSpriteNode()
     
     override func didMove(to view: SKView) {
 
         makeBackground()
         makePlayButton(playButtonTex)
+
     }
     /**
      Makes and displays background and animation
@@ -49,6 +42,7 @@ class GameScene: SKScene {
         playButton.position = CGPoint(x: self.frame.midX, y: self.frame.midY)
         self.addChild(playButton)
     }
+    
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         

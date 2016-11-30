@@ -1,19 +1,16 @@
-//
 //  GameScene.swift
 //  FlyOrDie
 //
 //  Created by KBryan on 2016-02-13.
 //  Copyright (c) 2016 KBryan. All rights reserved.
-//
+//  2016-11-29 Updated to Swift 3.0
 
 import SpriteKit
-
 
 struct PhysicsCategory {
     static let birdGroup      : UInt32 =  1
     static let objectGroup       : UInt32 = 2
     static let gapGroup       : UInt32 = 0 << 3
-    
 }
 
 class MainGame: SKScene , SKPhysicsContactDelegate{
@@ -37,8 +34,8 @@ class MainGame: SKScene , SKPhysicsContactDelegate{
     var movingObjects = SKNode()
     
     
-    var gapHeight:CGFloat?// = bird.size.height * 2.5
-    var pipeOffset:CGFloat?// = CGFloat(movementAmount) - self.frame.height / 4
+    var gapHeight:CGFloat?
+    var pipeOffset:CGFloat?
     
     
     override func didMove(to view: SKView) {
@@ -55,20 +52,37 @@ class MainGame: SKScene , SKPhysicsContactDelegate{
         self.physicsWorld.contactDelegate = self
         //self.physicsWorld.gravity = CGVectorMake(0, -5)
         self.addChild(movingObjects)
+
+        createPlayer()
+        createGround()
+        
+        /// draw pipes
+        let timer = Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(MainGame.makePipes), userInfo: nil, repeats: true)
+        timer.fire()
+        
+        self.addChild(scoreLabel)
         
         
-        
+    }
+    func createGround() -> Void {
+        let ground = SKNode()
+        ground.position = CGPoint(x: 0, y: 0)
+        ground.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: self.frame.size.width, height: 1))
+        ground.physicsBody?.isDynamic = false
+        ground.physicsBody?.categoryBitMask = PhysicsCategory.objectGroup
+        self.addChild(ground)
+    }
+    func createPlayer() -> Void {
         /// Create the bird
         let birdTexture = SKTexture(imageNamed: "flappy1")
         let birdTexture2 = SKTexture(imageNamed: "flappy2")
         let animation = SKAction.animate(with: [birdTexture, birdTexture2], timePerFrame: 0.1)
         let makeBirdFlap = SKAction.repeatForever(animation)
-        
         /**
-        Create the animation
-        
-        - parameter texture: <#texture description#>
-        */
+         Create the animation
+         
+         - parameter texture: <#texture description#>
+         */
         player = SKSpriteNode(texture: birdTexture)
         player.position = CGPoint(x: self.frame.midX, y: self.frame.midY)
         player.run(makeBirdFlap)
@@ -80,19 +94,6 @@ class MainGame: SKScene , SKPhysicsContactDelegate{
         player.physicsBody?.contactTestBitMask = PhysicsCategory.objectGroup
         player.physicsBody?.collisionBitMask = PhysicsCategory.gapGroup
         self.addChild(player)
-        
-        let ground = SKNode()
-        ground.position = CGPoint(x: 0, y: 0)
-        ground.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: self.frame.size.width, height: 1))
-        ground.physicsBody?.isDynamic = false
-        ground.physicsBody?.categoryBitMask = PhysicsCategory.objectGroup
-        self.addChild(ground)
-        /// draw pipes
-        let timer = Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(MainGame.makePipes), userInfo: nil, repeats: true)
-        timer.fire()
-        
-        self.addChild(scoreLabel)
-        
         
     }
     func makeBackground()
@@ -174,11 +175,7 @@ class MainGame: SKScene , SKPhysicsContactDelegate{
             if(gameOver == 0) {
                 gameOver = 1
                 movingObjects.speed = 0
-                highScoreLabal.fontName = "Helvetica"
-                highScoreLabal.fontSize = 25
-                highScoreLabal.text = "Your current High Score is ... \(score)"
-                highScoreLabal.position = CGPoint(x: self.frame.midX, y: self.frame.size.height - 70)
-                highScoreLabal.zPosition = 11
+                
                 labelHolder.addChild(highScoreLabal)
                 gameOverLabel.fontName = "Helvetica"
                 gameOverLabel.fontSize = 30
@@ -188,26 +185,19 @@ class MainGame: SKScene , SKPhysicsContactDelegate{
                 labelHolder.addChild(gameOverLabel)
             }
         }
-        
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         /* Called when a touch begins */
-        
         //for touch in touches {
         if(gameOver == 0) {
             player.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
             player.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 50))
         } else {
-            
-            
             let nextScene = GameScene(size: scene!.size)
             nextScene.scaleMode = .aspectFill
-            
             scene?.view?.presentScene(nextScene)
-            
         }
     }
-    
     override func update(_ currentTime: TimeInterval) {
         /* Called before each frame is rendered */
     }
